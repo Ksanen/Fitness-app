@@ -1,12 +1,43 @@
-<form>
+<form
+  [ngClass]="{
+    'was-validated': wasValidated
+  }"
+  [formGroup]="form"
+  (ngSubmit)="logIn()"
+>
   <h1>Zaloguj się</h1>
-  <div class="field">
-    <label for="nick">Nickname</label>
-    <input type="text" id="nick" />
-  </div>
   <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" />
+    <div class="field">
+      <label class="form-label" for="nick">Nickname</label>
+      <input
+        class="form-control"
+        type="text"
+        id="nick"
+        formControlName="login"
+        required
+        [ngClass]="{
+          'is-invalid':
+            form.get('login')?.invalid &&
+            (form.get('login')?.touched || form.get('login')?.dirty)
+        }"
+      />
+    </div>
+    <div>
+      <label class="form-label" for="password">Password</label>
+      <input
+        class="form-control"
+        type="password"
+        id="password"
+        formControlName="password"
+        required
+        [ngClass]="{
+          'is-invalid':
+            form.get('password')?.invalid &&
+            (form.get('password')?.touched || form.get('password')?.dirty)
+        }"
+      />
+    </div>
   </div>
-  <input type="button" value="Log in" class="btn btn-primary" />
+
+  <input type="submit" value="Log in" class="btn btn-primary" />
 </form>
