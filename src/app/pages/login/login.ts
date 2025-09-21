@@ -7,9 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -19,7 +20,7 @@ export default class Login {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl(' ', Validators.required),
     });
   }
   logIn() {

@@ -5,7 +5,7 @@
   [formGroup]="form"
   (ngSubmit)="logIn()"
 >
-  <h1>Zaloguj się</h1>
+  <h1>Log in</h1>
   <div>
     <div class="field">
       <label class="form-label" for="nick">Nickname</label>
@@ -38,6 +38,6 @@
       />
     </div>
   </div>
-
+  <p>Don't have an account? <a routerLink="/register">register</a></p>
   <input type="submit" value="Log in" class="btn btn-primary" />
 </form>
