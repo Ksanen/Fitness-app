@@ -7,18 +7,19 @@
 >
   <h1>Log in</h1>
   <div>
+    <p class="message">{{ message }}</p>
     <div class="field">
-      <label class="form-label" for="nick">Nickname</label>
+      <label class="form-label" for="nick">Username</label>
       <input
         class="form-control"
         type="text"
         id="nick"
-        formControlName="login"
+        formControlName="username"
         required
         [ngClass]="{
           'is-invalid':
-            form.get('login')?.invalid &&
-            (form.get('login')?.touched || form.get('login')?.dirty)
+            form.get('username')?.invalid &&
+            (form.get('username')?.touched || form.get('username')?.dirty)
         }"
       />
     </div>
@@ -38,6 +39,9 @@
       />
     </div>
   </div>
-  <p>Don't have an account? <a routerLink="/register">register</a></p>
+  <p>
+    Don't have an account?
+    <a routerLink="/register">register</a>
+  </p>
   <input type="submit" value="Log in" class="btn btn-primary" />
 </form>

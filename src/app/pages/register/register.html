@@ -1,1 +1,59 @@
-<p>register works!</p>
+<form
+  [ngClass]="{
+    'was-validated': wasValidated
+  }"
+  [formGroup]="form"
+  (ngSubmit)="register()"
+>
+  <h1>Register</h1>
+  <div>
+    <p class="message">{{ message }}</p>
+    <div class="field">
+      <label class="form-label" for="nick">Username</label>
+      <input
+        class="form-control"
+        type="text"
+        id="nick"
+        formControlName="username"
+        required
+        [ngClass]="{
+          'is-invalid':
+            form.get('username')?.invalid &&
+            (form.get('username')?.touched || form.get('username')?.dirty)
+        }"
+      />
+    </div>
+    <div>
+      <label class="form-label" for="password">Password</label>
+      <input
+        class="form-control"
+        type="password"
+        id="password"
+        formControlName="password"
+        required
+        [ngClass]="{
+          'is-invalid':
+            form.get('password')?.invalid &&
+            (form.get('password')?.touched || form.get('password')?.dirty)
+        }"
+      />
+    </div>
+    <div>
+      <label class="form-label" for="passwordRepeat">Repeat password</label>
+      <input
+        class="form-control"
+        type="password"
+        id="passwordRepeat"
+        formControlName="passwordRepeat"
+        required
+        [ngClass]="{
+          'is-invalid':
+            form.get('passwordRepeat')?.invalid &&
+            (form.get('passwordRepeat')?.touched ||
+              form.get('passwordRepeat')?.dirty)
+        }"
+      />
+    </div>
+  </div>
+  <input type="submit" value="Register" class="btn btn-primary" />
+</form>

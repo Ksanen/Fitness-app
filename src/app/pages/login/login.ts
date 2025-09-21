@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { LoginService } from './login-service';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
@@ -17,15 +18,26 @@ import { RouterLink } from '@angular/router';
 export default class Login {
   form!: FormGroup;
   wasValidated: boolean = false;
+  message: string = '';
+  router = inject(Router);
+  loginService = inject(LoginService);
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      login: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
       password: new FormControl(' ', Validators.required),
     });
   }
   logIn() {
     this.wasValidated = true;
-    console.log(this.form);
     if (this.form.invalid) return;
+    const user = this.loginService.getUserFromLocalStorage(
+      this.form.get('username')?.value,
+      this.form.get('password')?.value
+    );
+    if (user === null) {
+      this.message = 'username or password are incorrect';
+      return;
+    }
+    this.router.navigate(['mainPage']);
   }
 }
